@@ -1,0 +1,106 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import HeroTerminal from '../components/HeroTerminal.astro';
+import Prompt from '../components/Prompt.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import SquidMark from '../components/SquidMark.astro';
+import WriteupCard from '../components/WriteupCard.astro';
+import { site } from '../config';
+import { getProjects, getServices, getWriteups } from '../lib/content';
+
+const services = await getServices();
+const projects = (await getProjects()).slice(0, 3);
+const writeups = (await getWriteups()).slice(0, 3);
+const home = await getEntry('pages', 'home');
+const contact = await getEntry('pages', 'contact');
+if (!contact) {
+  throw new Error('Missing src/content/pages/contact.md');
+}
+---
+
+<Base title={site.brand} description={site.description}>
+  <section class="hero">
+    <SquidMark class="hero-watermark" />
+    <div class="shell">
+      <h1>{site.brand}</h1>
+      <p class="tagline">{site.role}</p>
+      <HeroTerminal lines={home?.data.terminal} />
+      <ul class="actions">
+        {
+          site.links.map((link) => (
+            <li>
+              <a
+                class:list={['button', link.href.endsWith('.pdf') && 'button-primary']}
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <div class="shell">
+    <section class="section section-lead" aria-labelledby="services-heading">
+      <div class="prose section-intro" data-reveal>
+        <Prompt path="work" />
+        <h2 id="services-heading">What I do</h2>
+      </div>
+      <ul class="card-grid">
+        {services.map((service) => <ServiceCard service={service} />)}
+      </ul>
+    </section>
+
+    <section class="section section-roomy" aria-labelledby="projects-heading">
+      <div class="prose section-intro" data-reveal>
+        <Prompt path="projects" />
+        <h2 id="projects-heading">Featured projects</h2>
+      </div>
+      {
+        projects.length > 0 ? (
+          <ul class="card-grid">
+            {projects.map((project) => (
+              <li class="card" data-reveal>
+                <ProjectCard project={project} level="h3" />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty prose">Projects will show up here.</p>
+        )
+      }
+    </section>
+
+    <section class="section section-snug prose" aria-labelledby="writeups-heading">
+      <div class="section-intro" data-reveal>
+        <Prompt path="writeups" />
+        <h2 id="writeups-heading">Latest writeups</h2>
+      </div>
+      {
+        writeups.length > 0 ? (
+          <ul class="entry-list">
+            {writeups.map((writeup) => (
+              <li data-reveal>
+                <WriteupCard writeup={writeup} level="h3" />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">Writeups will show up here.</p>
+        )
+      }
+      {writeups.length > 0 && <p class="more"><a href="/writeups/">All writeups</a></p>}
+    </section>
+
+    <section class="section cta prose" aria-labelledby="contact-heading" data-reveal>
+      <Prompt path="contact" />
+      <h2 id="contact-heading">Contact</h2>
+      <p>{contact.data.lead ?? contact.data.description}</p>
+      <p class="more"><a class="button button-primary" href="/contact/">Get in touch</a></p>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import SquidMark from '../components/SquidMark.astro';
+---
+
+<Base title="Not found" description="That command is not on this site." robots="noindex" canonical={false}>
+  <div class="shell page">
+    <article class="prose">
+      <SquidMark class="notfound-mark" />
+      <p class="prompt" aria-hidden="true">~/</p>
+      <h1>command not found</h1>
+      <p>That path is not on this site.</p>
+      <p><a href="/">Back home</a></p>
+    </article>
+  </div>
+</Base>

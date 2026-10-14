@@ -1,0 +1,9 @@
+---
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+---
+
+<p class="prompt" aria-hidden="true">~/{path}</p>

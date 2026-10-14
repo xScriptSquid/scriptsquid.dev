@@ -1,0 +1,39 @@
+---
+import { getEntry } from 'astro:content';
+import Head from '../components/Head.astro';
+import SquidMark from '../components/SquidMark.astro';
+import { site } from '../config';
+
+const page = await getEntry('pages', 'coming-soon');
+if (!page?.data.terminal?.[0]) {
+  throw new Error('Missing terminal line in src/content/pages/coming-soon.md');
+}
+const [line] = page.data.terminal;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title={page.data.title}
+      description={page.data.description}
+      canonicalPath="/"
+      sitemap={false}
+      motion={false}
+    />
+  </head>
+  <body>
+    <div class="soon">
+      <SquidMark class="soon-watermark" />
+      <main class="soon-main">
+        <h1 class="visually-hidden">{site.brand}</h1>
+        <div class="terminal soon-terminal">
+          <p class="terminal-line">
+            <span class="prompt">~/</span> <span class="terminal-command">{line.command}</span>
+          </p>
+          <p class="terminal-output">{line.output}<span class="cursor"></span></p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  lines?: { command: string; output: string }[];
+}
+
+const { lines = [] } = Astro.props;
+const first = lines[0];
+---
+
+<div class="terminal" aria-hidden="true" data-terminal={JSON.stringify(lines)}>
+  <p class="terminal-line">
+    <span class="prompt">~/</span> <span class="terminal-command">{first?.command}</span><span class="cursor"></span>
+  </p>
+  {first && <p class="terminal-output">{first.output}</p>}
+</div>

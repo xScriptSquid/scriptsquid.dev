@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  roles: CollectionEntry<'roles'>[];
+}
+
+const { roles } = Astro.props;
+
+function years(role: CollectionEntry<'roles'>): string {
+  const end = role.data.end ?? 'present';
+  return `${role.data.start}\u2013${end}`;
+}
+---
+
+<ol class="timeline">
+  {
+    roles.map((role) => (
+      <li>
+        <p class="when">{years(role)}</p>
+        <h3>{role.data.title}</h3>
+        {role.data.summary && <p class="role-summary">{role.data.summary}</p>}
+      </li>
+    ))
+  }
+</ol>

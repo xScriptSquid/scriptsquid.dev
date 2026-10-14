@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import WriteupCard from './WriteupCard.astro';
+
+interface Props {
+  writeups: CollectionEntry<'writeups'>[];
+  tags: { slug: string; label: string }[];
+  active?: string;
+}
+
+const { writeups, tags, active } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <ul class="tag-filter">
+      <li>
+        <a href="/writeups/" aria-current={active ? undefined : 'page'}>
+          All
+        </a>
+      </li>
+      {tags.map((tag) => (
+        <li>
+          <a
+            href={`/writeups/tags/${tag.slug}/`}
+            aria-current={active === tag.slug ? 'page' : undefined}
+          >
+            {tag.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+{
+  writeups.length > 0 ? (
+    <ul class="entry-list">
+      {writeups.map((writeup) => (
+        <li data-reveal>
+          <WriteupCard writeup={writeup} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="empty">Writeups will show up here.</p>
+  )
+}

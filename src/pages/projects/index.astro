@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Prompt from '../../components/Prompt.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/content';
+
+const projects = await getProjects();
+---
+
+<Base title="Projects" description="Infrastructure automation and security projects.">
+  <div class="shell page">
+    <div class="prose section-intro">
+      <Prompt path="projects" />
+      <h1>Projects</h1>
+    </div>
+    {
+      projects.length > 0 ? (
+        <ul class="card-grid">
+          {projects.map((project) => (
+            <li class="card" data-reveal>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty prose">Projects will show up here.</p>
+      )
+    }
+  </div>
+</Base>

@@ -1,0 +1,42 @@
+---
+import { getEntry } from 'astro:content';
+import Article from '../layouts/Article.astro';
+import { site } from '../config';
+
+const contact = await getEntry('pages', 'contact');
+if (!contact) {
+  throw new Error('Missing src/content/pages/contact.md');
+}
+
+const labels = ['Email', 'GitHub', 'LinkedIn'] as const;
+const links = labels.flatMap((label) => {
+  const link = site.links.find((item) => item.label === label);
+  return link ? [link] : [];
+});
+
+function linkText(href: string, label: string): string {
+  return href.startsWith('mailto:') ? href.slice('mailto:'.length) : label;
+}
+---
+
+<Article title={contact.data.title} description={contact.data.description} prompt="contact">
+  <p>{contact.data.lead}</p>
+  <ul class="links">
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href}>{linkText(link.href, link.label)}</a>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    contact.data.pgp && (
+      <>
+        <h2>PGP</h2>
+        {contact.data.pgpNote && <p>{contact.data.pgpNote}</p>}
+        <pre class="pgp"><code>{contact.data.pgp.trim()}</code></pre>
+      </>
+    )
+  }
+</Article>

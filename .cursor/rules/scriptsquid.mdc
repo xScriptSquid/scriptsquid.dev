@@ -1,0 +1,27 @@
+---
+description: ScriptSquid stack, design, and engineering constraints
+alwaysApply: true
+---
+
+# scriptsquid.dev
+
+Portfolio and blog for a senior systems administrator moving into security. Brand: ScriptSquid. Tagline: "I automate infrastructure, then try to break it."
+
+- Astro static output, TypeScript, plain CSS custom properties. No Tailwind.
+- Posts, projects, and page copy live in `src/content` (Markdown/MDX collections). Do not hardcode that content in components.
+- Deploy target: Cloudflare Pages (`npm run build`, output `dist`).
+
+Design:
+
+- Dark theme by default. Light theme only through `prefers-color-scheme`.
+- One accent, teal/cyan around `#2dd4bf`. No neon green, no Matrix effects.
+- JetBrains Mono for headings and code. Inter for body. Self-host both. Do not load fonts from a third party at runtime.
+- Prose max-width about 720px. Grids max-width about 1280px. Leave generous whitespace.
+- Terminal cues stay subtle: prompt labels like `~/projects`, and a blinking cursor in the hero only.
+
+Engineering:
+
+- No client-side JavaScript unless a feature cannot work without it. Pages must stay readable with JavaScript disabled.
+- Semantic HTML. WCAG AA contrast, visible focus, alt text on images.
+- No third-party trackers.
+- Keep components small. Site identity (name, role, tagline) lives in `src/config.ts`.

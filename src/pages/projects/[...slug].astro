@@ -1,0 +1,67 @@
+---
+import { render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import { formatDate, getProjects } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const hasBody = Boolean(project.body?.trim());
+---
+
+<Article title={project.data.title} description={project.data.summary} prompt="projects">
+  <p slot="meta" class="meta">
+    <time datetime={project.data.date.toISOString()}>{formatDate(project.data.date)}</time>
+  </p>
+  <p class="summary">{project.data.summary}</p>
+  {
+    project.data.stack.length > 0 && (
+      <ul class="tags chips" aria-label="Stack">
+        {project.data.stack.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    )
+  }
+  {
+    hasBody ? (
+      <Content />
+    ) : (
+      <>
+        <section aria-labelledby="problem-heading">
+          <h2 id="problem-heading">The Problem</h2>
+          <p>{project.data.problem}</p>
+        </section>
+        <section aria-labelledby="built-heading">
+          <h2 id="built-heading">What I Built</h2>
+          <p>{project.data.built}</p>
+        </section>
+        <section aria-labelledby="results-heading">
+          <h2 id="results-heading">Results</h2>
+          {project.data.metrics.length > 0 && (
+            <ul class="metrics">
+              {project.data.metrics.map((metric) => (
+                <li>
+                  <span class="metric-value">{metric.value}</span>
+                  <span class="metric-label">{metric.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p>{project.data.results}</p>
+        </section>
+        <section aria-labelledby="lessons-heading">
+          <h2 id="lessons-heading">Lessons Learned</h2>
+          <p>{project.data.lessons}</p>
+        </section>
+      </>
+    )
+  }
+</Article>

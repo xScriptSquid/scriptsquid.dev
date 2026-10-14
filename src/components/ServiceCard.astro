@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Network from '@lucide/astro/icons/network';
+import Shield from '@lucide/astro/icons/shield';
+import Terminal from '@lucide/astro/icons/terminal';
+
+interface Props {
+  service: CollectionEntry<'services'>;
+}
+
+const { service } = Astro.props;
+const icons = { network: Network, terminal: Terminal, shield: Shield };
+const Icon = service.data.icon ? icons[service.data.icon] : undefined;
+---
+
+<li class="card card-service" data-reveal>
+  {
+    Icon && (
+      <span class="card-icon">
+        <Icon size={20} stroke-width={1.75} aria-hidden="true" />
+      </span>
+    )
+  }
+  <h3>{service.data.title}</h3>
+  <p class="summary">{service.data.summary}</p>
+</li>

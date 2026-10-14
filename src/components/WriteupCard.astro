@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  writeup: CollectionEntry<'writeups'>;
+  level?: 'h2' | 'h3';
+}
+
+const { writeup, level = 'h2' } = Astro.props;
+const Title = level;
+---
+
+<article>
+  <Title>
+    <a href={`/writeups/${writeup.id}/`}>{writeup.data.title}</a>
+  </Title>
+  <p class="meta">
+    <time datetime={writeup.data.date.toISOString()}>{formatDate(writeup.data.date)}</time>
+  </p>
+  <p class="summary">{writeup.data.summary}</p>
+</article>

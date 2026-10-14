@@ -1,0 +1,26 @@
+---
+import Base from './Base.astro';
+import Prompt from '../components/Prompt.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  prompt: string;
+}
+
+const { title, description, prompt } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <div class="shell page">
+    <article class="prose">
+      <Prompt path={prompt} />
+      <header class="article-header">
+        <h1>{title}</h1>
+        <slot name="meta" />
+      </header>
+      <slot />
+    </article>
+  </div>
+  <slot name="scripts" slot="scripts" />
+</Base>

@@ -1,0 +1,71 @@
+---
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-700.css';
+import display700 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url';
+import display500 from '@fontsource/space-grotesk/files/space-grotesk-latin-500-normal.woff2?url';
+import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import mono400 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url';
+import '../styles/global.css';
+import { site } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  robots?: string;
+  canonical?: boolean;
+  canonicalPath?: string;
+  sitemap?: boolean;
+  motion?: boolean;
+}
+
+const {
+  title,
+  description,
+  robots,
+  canonical: includeCanonical = true,
+  canonicalPath = Astro.url.pathname,
+  sitemap = true,
+  motion = true,
+} = Astro.props;
+const pageTitle = title === site.brand ? site.brand : `${title} — ${site.brand}`;
+const canonical = new URL(canonicalPath, Astro.site ?? site.url);
+const ogImage = new URL('/og.png', Astro.site ?? site.url);
+const imageAlt = `${site.brand} squid mark. ${site.name} — ${site.role}.`;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href={display700} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={display500} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={mono400} as="font" type="font/woff2" crossorigin />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+{robots && <meta name="robots" content={robots} />}
+{includeCanonical && <link rel="canonical" href={canonical.href} />}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+{sitemap && <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />}
+<meta name="theme-color" content="#101413" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f4f7f6" media="(prefers-color-scheme: light)" />
+<meta property="og:site_name" content={site.brand} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+{includeCanonical && <meta property="og:url" content={canonical.href} />}
+<meta property="og:image" content={ogImage.href} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage.href} />
+<meta name="twitter:image:alt" content={imageAlt} />
+{motion && <script is:inline src="/scripts/motion.js" defer></script>}

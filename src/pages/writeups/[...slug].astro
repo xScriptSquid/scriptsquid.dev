@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { formatDate, getWriteups, readingLabel, tagSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const writeups = await getWriteups();
+  return writeups.map((writeup) => ({
+    params: { slug: writeup.id },
+    props: { writeup },
+  }));
+}
+
+const { writeup } = Astro.props;
+const { Content, headings } = await render(writeup);
+---
+
+<Article title={writeup.data.title} description={writeup.data.summary} prompt="writeups">
+  <p slot="meta" class="meta">
+    <time datetime={writeup.data.date.toISOString()}>{formatDate(writeup.data.date)}</time>
+    <span aria-hidden="true"> · </span>
+    <span>{readingLabel(writeup.body)}</span>
+  </p>
+  {
+    writeup.data.tags.length > 0 && (
+      <ul class="tags">
+        {writeup.data.tags.map((tag) => (
+          <li>
+            <a href={`/writeups/tags/${tagSlug(tag)}/`}>{tag}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  <TableOfContents headings={headings} />
+  <Content />
+  <script slot="scripts" is:inline src="/scripts/copy-code.js" defer></script>
+</Article>

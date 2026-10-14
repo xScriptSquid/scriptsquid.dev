@@ -1,0 +1,22 @@
+---
+import Solid from '../assets/scriptsquid-mark.svg';
+import Outline from '../assets/scriptsquid-mark-outline.svg';
+
+interface Props {
+  label?: string;
+  class?: string;
+  variant?: 'solid' | 'outline';
+}
+
+const { label, class: className, variant = 'solid' } = Astro.props;
+const Mark = variant === 'outline' ? Outline : Solid;
+const classes = ['squid-mark', `squid-mark-${variant}`, className];
+---
+
+{
+  label ? (
+    <Mark class:list={classes} role="img" aria-label={label} />
+  ) : (
+    <Mark class:list={classes} aria-hidden="true" focusable="false" />
+  )
+}

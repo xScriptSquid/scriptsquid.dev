@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  groups: CollectionEntry<'skills'>[];
+}
+
+const { groups } = Astro.props;
+---
+
+<ul class="skill-groups">
+  {
+    groups.map((group) => (
+      <li class="card card-service skill-group" data-reveal>
+        <h3>{group.data.title}</h3>
+        {group.data.note && <p class="skill-note">{group.data.note}</p>}
+        <ul class="skill-chips" aria-label={`${group.data.title} tools`}>
+          {group.data.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </li>
+    ))
+  }
+</ul>

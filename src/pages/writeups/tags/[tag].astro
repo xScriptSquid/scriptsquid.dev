@@ -1,0 +1,32 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Prompt from '../../../components/Prompt.astro';
+import WriteupBrowser from '../../../components/WriteupBrowser.astro';
+import { collectTags, getWriteups, tagSlug } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const writeups = await getWriteups();
+  return collectTags(writeups).map((tag) => ({
+    params: { tag: tag.slug },
+    props: {
+      tag,
+      writeups: writeups.filter((writeup) =>
+        writeup.data.tags.some((item) => tagSlug(item) === tag.slug),
+      ),
+      tags: collectTags(writeups),
+    },
+  }));
+}
+
+const { tag, writeups, tags } = Astro.props;
+---
+
+<Base title={tag.label} description={`Writeups tagged ${tag.label}.`}>
+  <div class="shell page">
+    <div class="prose">
+      <Prompt path={`writeups/${tag.slug}`} />
+      <h1>{tag.label}</h1>
+      <WriteupBrowser writeups={writeups} tags={tags} active={tag.slug} />
+    </div>
+  </div>
+</Base>

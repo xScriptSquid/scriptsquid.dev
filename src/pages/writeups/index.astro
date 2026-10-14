@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import Prompt from '../../components/Prompt.astro';
+import WriteupBrowser from '../../components/WriteupBrowser.astro';
+import { collectTags, getWriteups } from '../../lib/content';
+
+const writeups = await getWriteups();
+const tags = collectTags(writeups);
+---
+
+<Base title="Writeups" description="Notes on infrastructure automation and security.">
+  <div class="shell page">
+    <div class="prose">
+      <Prompt path="writeups" />
+      <h1>Writeups</h1>
+      <WriteupBrowser writeups={writeups} tags={tags} />
+    </div>
+  </div>
+</Base>
