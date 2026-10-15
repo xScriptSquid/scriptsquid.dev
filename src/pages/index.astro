@@ -34,6 +34,8 @@ if (!contact) {
               <a
                 class:list={['button', link.href.endsWith('.pdf') && 'button-primary']}
                 href={link.href}
+                target={link.href.endsWith('.pdf') ? '_blank' : undefined}
+                rel={link.href.endsWith('.pdf') ? 'noopener' : undefined}
               >
                 {link.label}
               </a>

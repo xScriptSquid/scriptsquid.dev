@@ -1,0 +1,23 @@
+---
+description: Text color hierarchy and how brightness signals importance
+alwaysApply: true
+---
+
+# Text color & hierarchy
+
+Use brightness to signal importance on every page. Never render a section as a flat
+block of uniform white text.
+
+Tiers (use the existing design tokens — do not hardcode hex):
+- Headings / section titles → --text (#E8ECE9), brightest
+- Body copy & lead sentences → --muted (#9AA4A0)
+- Short labels, dates, captions → --text-dim (#6B7570) — short text ONLY, never full sentences
+- --accent (#2DD4BF) → dates/kickers, links, hover & focus, chip borders. Never body text.
+
+Rules:
+- Two or three brightness levels per section, used consistently.
+- Keep all real body copy at WCAG AA contrast (≥4.5:1). --muted is safe;
+  --text-dim is for short labels/dates only.
+- Prefer scannable structure over dense paragraphs; cap long columns around 60–70ch.
+- Headings use Space Grotesk, body uses Inter. JetBrains Mono is for terminal
+  accents, code, kicker labels (~/…) and dates only — not headings or body.

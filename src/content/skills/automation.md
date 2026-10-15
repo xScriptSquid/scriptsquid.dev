@@ -1,6 +1,5 @@
 ---
 title: Automation
-note: Provisioning, integrations, and browser automation.
 items:
   - PowerShell
   - Python

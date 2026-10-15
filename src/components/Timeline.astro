@@ -7,19 +7,28 @@ interface Props {
 
 const { roles } = Astro.props;
 
-function years(role: CollectionEntry<'roles'>): string {
+function span(role: CollectionEntry<'roles'>): string {
   const end = role.data.end ?? 'present';
-  return `${role.data.start}\u2013${end}`;
+  return `${role.data.start} \u2014 ${end}`;
 }
 ---
 
 <ol class="timeline">
   {
     roles.map((role) => (
-      <li>
-        <p class="when">{years(role)}</p>
+      <li class:list={{ 'is-current': role.data.end == null }}>
+        <p class="role-when">{span(role)}</p>
         <h3>{role.data.title}</h3>
         {role.data.summary && <p class="role-summary">{role.data.summary}</p>}
+        {
+          role.data.highlights.length > 0 && (
+            <ul class="role-highlights">
+              {role.data.highlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )
+        }
       </li>
     ))
   }

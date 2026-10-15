@@ -70,6 +70,7 @@ const roles = defineCollection({
     start: z.number().int(),
     end: z.number().int().optional(),
     summary: z.string().optional(),
+    highlights: z.array(z.string()).default([]),
     order: z.number(),
   }),
 });

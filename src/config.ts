@@ -17,7 +17,7 @@ export const site = {
     { href: '/contact/', label: 'Contact' },
   ],
   links: [
-    { label: 'Resume', href: '/resume.pdf' },
+    { label: 'Resume', href: '/Ray-Renteria-Resume.pdf' },
     { label: 'GitHub', href: 'https://github.com/xscriptsquid' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/r-renteria/' },
     { label: 'Email', href: 'mailto:ray@scriptsquid.dev' },

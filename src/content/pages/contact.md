@@ -1,7 +1,7 @@
 ---
 title: Contact
 description: How to reach ScriptSquid.
-lead: The work is on this site. For everything else, send a note.
+lead: Open to security and systems roles, and always happy to talk shop. Reach me here.
 pgpNote: 'Fingerprint: F6F4 5273 A69F 9186 6134 7CDC A13A 4A80 B858 EC9C'
 pgp: |
   -----BEGIN PGP PUBLIC KEY BLOCK-----

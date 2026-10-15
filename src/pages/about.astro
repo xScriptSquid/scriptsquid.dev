@@ -3,32 +3,29 @@ import { getEntry, render } from 'astro:content';
 import Article from '../layouts/Article.astro';
 import SkillGroups from '../components/SkillGroups.astro';
 import Timeline from '../components/Timeline.astro';
-import { site } from '../config';
-import { getLearning, getRoles, getSkills } from '../lib/content';
+import { getRoles, getSkills } from '../lib/content';
 
 const about = await getEntry('pages', 'about');
 if (!about) {
   throw new Error('Missing src/content/pages/about.md');
 }
 const offClock = await getEntry('pages', 'off-the-clock');
+const learning = await getEntry('pages', 'currently-learning');
 const { Content } = await render(about);
 const OffClock = offClock ? (await render(offClock)).Content : undefined;
+const Learning = learning ? (await render(learning)).Content : undefined;
 const roles = await getRoles();
 const skills = await getSkills();
-const learning = await getLearning();
 ---
 
-<Article title={about.data.title} description={about.data.description} prompt="about">
-  <p slot="meta" class="page-lead">{site.tagline}</p>
+<Article class="page-about" title={about.data.title} description={about.data.description} prompt="about">
   <Content />
   <h2>Timeline</h2>
   <Timeline roles={roles} />
   <h2>What I work with</h2>
   <SkillGroups groups={skills} />
   <h2>Currently learning</h2>
-  <ul>
-    {learning.map((item) => <li>{item.data.title}</li>)}
-  </ul>
+  {Learning && <Learning />}
   {
     offClock && OffClock && (
       <>
