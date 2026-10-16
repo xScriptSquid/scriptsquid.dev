@@ -4,7 +4,7 @@ summary: "A single pane for IT to run people management and provisioning, replac
 date: 2026-10-09
 tags: ["full-stack", "react", "typescript", "automation", "firebase"]
 stack: ["React 19", "TypeScript", "Vite", "Firebase", "Cloud Functions", "Tailwind"]
-draft: true
+draft: false
 ---
 
 ## The Problem

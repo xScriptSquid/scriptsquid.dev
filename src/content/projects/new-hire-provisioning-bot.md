@@ -4,7 +4,7 @@ summary: "Cut multi-platform account setup from a manual checklist to a button c
 date: 2026-08-26
 tags: ["automation", "python", "api-integration", "onboarding"]
 stack: ["Python", "Playwright", "REST APIs", "Firebase/Firestore", "HTTP Basic Auth"]
-draft: true
+draft: false
 ---
 
 ## The Problem

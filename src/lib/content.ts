@@ -66,8 +66,3 @@ export async function getSkills(): Promise<CollectionEntry<'skills'>[]> {
   const skills = await getCollection('skills');
   return skills.sort((a, b) => a.data.order - b.data.order);
 }
-
-export async function getLearning(): Promise<CollectionEntry<'learning'>[]> {
-  const learning = await getCollection('learning');
-  return learning.sort((a, b) => a.data.order - b.data.order);
-}

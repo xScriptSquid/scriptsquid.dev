@@ -1,6 +1,6 @@
 export const site = {
   // While false, `npm run build` ships only the coming-soon page.
-  launched: false,
+  launched: true,
   name: 'Ray Renteria',
   brand: 'ScriptSquid',
   role: 'Systems & security engineer',

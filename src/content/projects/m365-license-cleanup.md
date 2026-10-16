@@ -4,7 +4,7 @@ summary: "Audited the tenant with Graph sign-in data and right-sized licenses ag
 date: 2026-10-06
 tags: ["m365", "entra", "graph-api", "cost-optimization"]
 stack: ["Microsoft Graph", "Entra ID P1", "PowerShell"]
-draft: true
+draft: false
 ---
 
 ## The Problem

@@ -3,7 +3,7 @@ title: "Building a WiFi Security Audit Rig with Parrot OS"
 summary: "How I built a repeatable setup to validate WPA pre-shared key strength across the networks I manage, and what the results changed."
 date: 2026-10-07
 tags: ["security", "wireless", "hardening", "homelab"]
-draft: true
+draft: false
 ---
 
 > **Scope and authorization.** Everything here is authorized testing on networks

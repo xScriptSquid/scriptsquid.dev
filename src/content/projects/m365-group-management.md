@@ -4,7 +4,7 @@ summary: "Add or remove staff from security groups and distribution lists by rol
 date: 2026-10-01
 tags: ["automation", "m365", "graph-api", "powershell", "azure"]
 stack: ["Microsoft Graph", "Exchange Online PowerShell", "Azure Functions", "Entra ID", "MSAL"]
-draft: true
+draft: false
 ---
 
 ## The Problem

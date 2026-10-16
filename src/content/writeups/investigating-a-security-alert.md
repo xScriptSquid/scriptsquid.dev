@@ -3,7 +3,7 @@ title: "How I Investigate a Security Alert"
 summary: "A walkthrough of how I work an alert from first ping to written report, using a composite example rather than a real incident."
 date: 2026-10-12
 tags: ["security", "incident-response", "investigation", "process"]
-draft: true
+draft: false
 ---
 
 > **Note.** The scenario below is a composite built for illustration. No real

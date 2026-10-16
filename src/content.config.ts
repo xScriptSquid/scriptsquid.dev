@@ -85,12 +85,4 @@ const skills = defineCollection({
   }),
 });
 
-const learning = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/learning' }),
-  schema: z.object({
-    title: z.string(),
-    order: z.number(),
-  }),
-});
-
-export const collections = { writeups, projects, services, pages, roles, skills, learning };
+export const collections = { writeups, projects, services, pages, roles, skills };
