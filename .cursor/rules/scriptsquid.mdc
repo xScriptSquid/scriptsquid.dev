@@ -9,7 +9,7 @@ Portfolio and blog for a senior systems administrator moving into security. Bran
 
 - Astro static output, TypeScript, plain CSS custom properties. No Tailwind.
 - Posts, projects, and page copy live in `src/content` (Markdown/MDX collections). Do not hardcode that content in components.
-- Deploy target: Netlify, linked to the GitHub repo `xScriptSquid/squidsite` (`npm run build`, output `dist`, Node 22).
+- Deploy target: Netlify, linked to the GitHub repo `xScriptSquid/scriptsquid.dev` (`npm run build`, output `dist`, Node 22).
 
 Design:
 
