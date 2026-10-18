@@ -319,7 +319,7 @@ a:hover {
     right: max(var(--pad), calc((100% - var(--grid)) / 2));
     display: block;
     height: min(78%, 40vw);
-    opacity: 0.03;
+    opacity: 0.05;
     transform: translateY(-50%);
   }
 }
