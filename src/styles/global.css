@@ -1,5 +1,4 @@
-/* Dark is the default. Light only follows the OS preference.
-   Light-mode accent is a darker teal so body links stay WCAG AA. */
+/* Dark theme only. The palette does not follow prefers-color-scheme. */
 :root {
   color-scheme: dark;
   --bg: #101413;
@@ -53,33 +52,6 @@
   --prose: 45rem;
   --grid: 80rem;
   --pad: clamp(1rem, 4vw, 2rem);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #f4f7f6;
-    --bg-elevated: #ffffff;
-    --text: #14201c;
-    --muted: #3f524c;
-    --border: #d3dfdb;
-    --accent: #0f766e;
-    --accent-text: #0f766e;
-    --on-accent: #f4f7f6;
-    --prompt-text: #0f766e;
-    --text-soft: #2c3f38;
-    --text-dim: #5c6b66;
-    --chip-border: #bfd0ca;
-    --chip-bg: #f4f7f6;
-    --logo-fill: #0f766e;
-    --bg-raised: #ffffff;
-    --bg-deep: #e9efed;
-    --skill-chip-border: rgb(15 118 110 / 0.35);
-    --skill-chip-bg: rgb(15 118 110 / 0.05);
-    --shadow-card: 0 1px 2px rgb(16 40 36 / 0.06), 0 10px 24px -14px rgb(16 40 36 / 0.18);
-    --shadow-card-hover: 0 2px 4px rgb(16 40 36 / 0.06), 0 18px 36px -18px rgb(16 40 36 / 0.25),
-      0 8px 24px -14px rgb(15 118 110 / 0.2);
-  }
 }
 
 @font-face {
@@ -1120,19 +1092,6 @@ a:hover {
   font-style: var(--shiki-dark-font-style);
   font-weight: var(--shiki-dark-font-weight);
   text-decoration: var(--shiki-dark-text-decoration);
-}
-
-@media (prefers-color-scheme: light) {
-  .prose pre {
-    color: var(--shiki-light, var(--text));
-  }
-
-  .prose pre span {
-    color: var(--shiki-light);
-    font-style: var(--shiki-light-font-style);
-    font-weight: var(--shiki-light-font-weight);
-    text-decoration: var(--shiki-light-text-decoration);
-  }
 }
 
 .site-footer {

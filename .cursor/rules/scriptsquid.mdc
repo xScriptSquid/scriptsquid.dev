@@ -13,7 +13,7 @@ Portfolio and blog for a senior systems administrator moving into security. Bran
 
 Design:
 
-- Dark theme by default. Light theme only through `prefers-color-scheme`.
+- Dark theme only. Do not add a light palette or follow `prefers-color-scheme`.
 - One accent, teal/cyan around `#2dd4bf`. No neon green, no Matrix effects.
 - Space Grotesk for headings. Inter for body. JetBrains Mono for terminal accents, code, kicker labels, and dates. Self-host all three. Do not load fonts from a third party at runtime.
 - Prose max-width about 720px. Grids max-width about 1280px. Leave generous whitespace.
